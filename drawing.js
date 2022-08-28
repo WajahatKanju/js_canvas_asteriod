@@ -35,18 +35,17 @@ export const draw_grid = (
   }
 
   context.restore();
-  canvas.beginPath();
 };
 
 export const draw_asteroid = (canvas, context, radius, segments, options) => {
-  options = options || {};
+  options = options || {noise: 0.5};
   context.strokeStyle = options.stroke || "white";
   context.fillStyle = options.fill || "black";
   context.save();
   context.beginPath();
   for (let i = 0; i < segments; i++) {
     context.rotate((2 * Math.PI) / segments);
-    context.lineTo(radius, 0);
+    context.lineTo(radius + radius * options.noise * (Math.random() - 0.75), 0);
   }
   context.closePath();
   context.fill();

@@ -6,88 +6,19 @@ const context = canvas.getContext("2d");
 // canvas.width = window.innerWidth;
 // canvas.height = window.innerHeight;
 
+draw_grid(canvas, context);
 
-let radius = 300;
+const generateRandom = (min, max) => Math.floor(Math.random() * (max - min ) +min);
 
-// let segments = 1;
-// for (let x = 0.25; x < 1; x += 0.5) {
-//   for (let y = 0.25; y < 1; y += 0.5) {
-//     segments += 2;
-//     context.save();
-//     context.translate(context.canvas.width * x, context.canvas.height * y);
-//     draw_asteroid(canvas, context, 60, segments, { guide: true });
-//     context.restore();
-//   }
-// }
+let radius = context.canvas.width/12;
+let noise  = 0.5;
 
-context.save();
-context.beginPath();
-context.strokeStyle = '#FFF';
-// context.moveTo(100, 100);
-context.translate(context.canvas.width * 0.25, context.canvas.height * 0.25);
-context.moveTo(0, 80);
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-context.rotate(Math.PI * 0.5 / 4);
-context.lineTo(0, 80);
-
-// context.lineTo(50, 0);
-// context.rotate(Math.PI * 2 /5);
-// context.lineTo(50, 0);
-// context.rotate(Math.PI * 2 /5);
-// context.lineTo(50, 0);
-// context.rotate(Math.PI * 2 /5);
-// context.lineTo(50, 0);
-// context.rotate(Math.PI * 2 /5);
-// context.lineTo(50, 0);
-context.stroke();
-// for (let i = 0; i < 4; i++) {
-//   context.rotate((2 * Math.PI) / 4);
-//   context.lineTo(30, 0);
-// }
-context.restore();
+for (let x = 0.10; x < 1; x += 0.20) {
+  for (let y = 0.10; y < 1; y += 0.20) {
+    let segments = generateRandom(15,25);
+    context.save();
+    context.translate(context.canvas.width * x, context.canvas.height * y);
+    draw_asteroid(canvas, context, radius, segments, { guide: true, noise:noise });
+    context.restore();
+  }
+}
