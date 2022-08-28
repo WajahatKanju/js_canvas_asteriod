@@ -37,15 +37,15 @@ export const draw_grid = (
   context.restore();
 };
 
-export const draw_asteroid = (canvas, context, radius, segments, options) => {
-  options = options || {noise: 0.5};
+export const draw_asteroid = (canvas, context, radius, shape, options) => {
+  options = options || { noise: 0.5 };
   context.strokeStyle = options.stroke || "white";
   context.fillStyle = options.fill || "black";
   context.save();
   context.beginPath();
-  for (let i = 0; i < segments; i++) {
-    context.rotate((2 * Math.PI) / segments);
-    context.lineTo(radius + radius * options.noise * (Math.random() - 0.75), 0);
+  for (let i = 0; i < shape.length; i++) {
+    context.rotate((2 * Math.PI) / shape.length);
+    context.lineTo(radius + radius * options.noise * shape[i], 0);
   }
   context.closePath();
   context.fill();
@@ -53,7 +53,10 @@ export const draw_asteroid = (canvas, context, radius, segments, options) => {
   if (options.guide) {
     context.lineWidth = 0.5;
     context.beginPath();
-    context.arc(0, 0, radius, 0, 2 * Math.PI);
+    context.arc(0, 0, radius + radius * options.noise, 0, 2 * Math.PI);
+    context.stroke();
+    context.beginPath();
+    context.arc(0, 0, radius - radius * options.noise, 0, 2 * Math.PI);
     context.stroke();
   }
   context.restore();
